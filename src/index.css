@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ریاضی‌بازی هشتم — تم و هویت بصری
+   فونت اصلی: Vazirmatn (نزدیک به «پلاسما»). برای عوض کردن
+   فونت، کافی است مقادیر --font-body / --font-display را
+   در :root تغییر دهید (مثلاً فونت پلاسما).
+   ============================================================ */
+:root {
+  --font-body: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+  --font-display: "Lalezar", "Vazirmatn", Tahoma, sans-serif;
+
+  --accent: #f59e0b;
+  --accent-contrast: #ffffff;
+  --accent-soft: rgba(245, 158, 11, 0.16);
+  --accent-strong: #d97706;
+
+  --ok: #10b981;
+  --bad: #ef4444;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f3ec;
+  --bg-grad: radial-gradient(1200px 600px at 85% -10%, rgba(245, 158, 11, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 0% 110%, rgba(20, 184, 166, 0.1), transparent 60%);
+  --panel: #fffdf8;
+  --panel-2: #f3eee2;
+  --text: #26224a;
+  --muted: #6d6a8a;
+  --line: #e3dccb;
+  --shadow: 0 10px 30px -12px rgba(60, 48, 12, 0.22);
+}
+
+:root[data-theme="dark"] {
+  --bg: #0d1020;
+  --bg-grad: radial-gradient(1200px 600px at 85% -10%, rgba(245, 158, 11, 0.1), transparent 60%),
+    radial-gradient(900px 500px at 0% 110%, rgba(45, 212, 191, 0.08), transparent 60%);
+  --panel: #161a31;
+  --panel-2: #1d2240;
+  --text: #e9eaf6;
+  --muted: #9aa0c6;
+  --line: #2b3155;
+  --shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.55);
+}
+
+html {
+  font-family: var(--font-body);
+}
+
+body {
+  background: var(--bg);
+  background-image: var(--bg-grad);
+  background-attachment: fixed;
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+*::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 8px;
+}
+
+/* ---------- کارت و دکمه ---------- */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.card-2 {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  user-select: none;
+  border: 1px solid transparent;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  box-shadow: 0 8px 20px -8px var(--accent);
+}
+.btn-accent:not(:disabled):hover {
+  filter: brightness(1.07);
+}
+.btn-ghost {
+  background: var(--panel);
+  border-color: var(--line);
+  color: var(--text);
+}
+.btn-ghost:not(:disabled):hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn-soft {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  border-color: transparent;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+.chip-accent {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent-strong);
+}
+
+.input {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.input::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+/* ---------- انیمیشن‌ها (ظریف) ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes softPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+@keyframes blinkDots {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+.anim-fadeup {
+  animation: fadeUp 0.45s ease both;
+}
+.anim-pop {
+  animation: popIn 0.3s ease both;
+}
+.anim-pulse-soft {
+  animation: softPulse 1.6s ease-in-out infinite;
+}
+.dot {
+  animation: blinkDots 1.2s infinite;
+}
+.dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fadeup,
+  .anim-pop,
+  .anim-pulse-soft,
+  .dot {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- ریاضی ---------- */
+.math {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  line-height: 1.5;
+}
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 2px;
+  line-height: 1.15;
+}
+.frac > span:first-child {
+  border-bottom: 1.5px solid currentColor;
+  padding: 0 4px;
+}
+.frac > span:last-child {
+  padding: 0 4px;
+}
+.sqrt {
+  display: inline-flex;
+  align-items: stretch;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+.sqrt > .rad {
+  font-size: 1.12em;
+  line-height: 1.25;
+}
+.sqrt > .rad-body {
+  border-top: 1.5px solid currentColor;
+  padding: 1px 4px 0 4px;
+}
+
+/* گزینه‌های آواتار */
+.snap-row {
+  display: flex;
+  gap: 0.9rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.2rem 0.9rem;
+  scroll-snap-type: x proximity;
+}
+.snap-row > * {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
